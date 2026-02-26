@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: fullstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: sachinviru/backend.v1
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_URL
+          value: "mongodb://mongodb-service:27017/mydb"
